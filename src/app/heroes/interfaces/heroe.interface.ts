@@ -1,8 +1,8 @@
 export interface SuperHeroes {
-    superheroes: Heroe[];
+    superheroes: Hero[];
 }
 
-export interface Heroe {
+export interface Hero {
     id: number;
     name: string;
     description: string;
