@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @Input() title: string = '';
   @Input() totalRegistros?: number = 0;
   @Input() icon?: string = '';
+  @Input() searchable?: boolean = false;
 
   @Output() searchEvent = new EventEmitter<string>();
 

@@ -1,35 +1,46 @@
-<div class="card">
-    @if(heroes){
-    <app-header [icon]="'military_tech'" [title]="'List of Heroes'" [totalRegistros]="lengthHeroes"
-        (searchEvent)="searchHero($event)"></app-header>
-    }
+<div class="container-xxl">
+    <div class="d-flex justify-content-end w-100 p-3">
+        <button mat-flat-button (click)="addHero()">Add Hero</button>
+    </div>
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 bg-white">
+    <div class="card">
+        @if(heroes){
+        <app-header [icon]="'military_tech'" [title]="'List of Heroes'" [totalRegistros]="lengthHeroes"
+            [searchable]="true" (searchEvent)="searchHero($event)"></app-header>
+        }
 
-        <ng-container matColumnDef="image">
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let element">
-                <img class="rounded-2 p-2" [src]="element.image" width="150" height="150">
-            </td>
-        </ng-container>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z0 bg-white">
 
-        <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Super Hero </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-        </ng-container>
+            <ng-container matColumnDef="image">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">
+                    <img class="rounded-2 p-2" [src]="element.image" width="150" height="150">
+                </td>
+            </ng-container>
 
-        <ng-container matColumnDef="description">
-            <th mat-header-cell *matHeaderCellDef> Description </th>
-            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-        </ng-container>
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Super Hero </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+            <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef> Description </th>
+                <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+            </ng-container>
 
-    @if(heroes){
-    <mat-paginator class="bg-white" [length]="lengthHeroes" [pageSize]="heroesPerPage" [pageSizeOptions]="[5, 10]"
-        aria-label="Select page">
-    </mat-paginator>
-    }
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" [attr.colspan]="displayedColumns.length" class="text-center p-3">
+                    No results found.
+                </td>
+            </tr>
+        </table>
+
+        @if(heroes){
+        <mat-paginator class="bg-white" [length]="lengthHeroes" [pageSize]="heroesPerPage" [pageSizeOptions]="[5, 10]"
+            aria-label="Select page">
+        </mat-paginator>
+        }
+    </div>
 </div>

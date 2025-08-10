@@ -10,10 +10,12 @@
     <span>| {{ totalRegistros }} {{ totalRegistros === 1 ? 'registro' : 'registros' }}</span>
     }
   </div>
-  <div class="search d-flex justify-content-end w-50">
-    <mat-form-field class="example-form-field">
-      <mat-label>Search hero</mat-label>
-      <input matInput type="text" [formControl]="search">
-    </mat-form-field>
-  </div>
+  @if(searchable){
+    <div class="search d-flex justify-content-end w-50">
+      <mat-form-field class="example-form-field">
+        <mat-label>Search hero</mat-label>
+        <input matInput type="text" [formControl]="search">
+      </mat-form-field>
+    </div>
+  }
 </div>

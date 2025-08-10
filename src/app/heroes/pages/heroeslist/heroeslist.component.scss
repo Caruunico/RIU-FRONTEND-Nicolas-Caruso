@@ -1,19 +1,29 @@
+@use '../../../../assets/styles/mixins.scss' as *;
+
 .card {
     padding: 24px;
-    margin: 32px;
     border-radius: 10px;
     box-shadow: 0 0 0px 0px transparent, 0 0 9px 0.25rem rgb(215 215 215 / 45%);
 
     table {
         tr:nth-child(even) {
-            td {
-                background-color: #F1F3F5;
-                border: none;
-            }
+            background-color: #F1F3F5;
+            border: none;
+        }
+
+        tr:hover {
+            background-color: #d7d7d7;
+            transition: 0.5s;
+            cursor: pointer;
+        }
+
+        th {
+            @include font(16px, 500, 45px, start, #303B47);
+            white-space: nowrap;
         }
 
         td {
-            border: none
+            border: none;
         }
     }
 }
