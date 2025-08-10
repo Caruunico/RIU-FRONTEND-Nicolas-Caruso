@@ -25,7 +25,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   ngOnInit(): void {
-    console.log(this.totalRegistros)
     this.search.valueChanges
       .pipe(
         distinctUntilChanged((prev, next) => JSON.stringify(prev) === JSON.stringify(next)),

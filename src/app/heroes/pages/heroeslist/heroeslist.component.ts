@@ -9,11 +9,13 @@ import { HeroesService } from '../../services/heroes-service/heroes.service';
 import { take } from 'rxjs';
 import { Router, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-heroeslist',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatPaginatorModule, HeaderComponent, RouterModule, MatButtonModule],
+  imports: [CommonModule, MatTableModule, MatPaginatorModule, HeaderComponent, RouterModule, MatButtonModule, MatMenuModule, MatIconModule],
   providers: [HeroesEndpointsService],
   templateUrl: './heroeslist.component.html',
   styleUrl: './heroeslist.component.scss'
@@ -25,7 +27,7 @@ export class HeroeslistComponent implements OnInit {
   private _heroService = inject(HeroesService);
   private _router = inject(Router);
 
-  public displayedColumns: string[] = ['image', 'name', 'description'];
+  public displayedColumns: string[] = ['image', 'name', 'description', 'actions'];
   public dataSource = new MatTableDataSource<Hero>([]);
 
   public heroes: Hero[] = [];
@@ -75,7 +77,11 @@ export class HeroeslistComponent implements OnInit {
     }
   }
 
-  public addHero() {
+  public goToAddHero() {
     this._router.navigate(['/add-hero']);
+  }
+
+  public goToEditHero(id: number){
+    this._router.navigate(['/edit-hero/' + id]);
   }
 }

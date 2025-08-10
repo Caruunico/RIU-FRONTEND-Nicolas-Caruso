@@ -27,3 +27,9 @@
         }
     }
 }
+
+::ng-deep .button-menu-item>.mat-mdc-menu-item-text{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}

@@ -1,0 +1,4 @@
+<div class="card">
+    <app-header [title]="'Edit your Hero'" [icon]="'edit'"></app-header>
+    <app-form-hero (onHero)="editHero($event)" [heroeSelected]="heroeSelected"></app-form-hero>
+</div>
