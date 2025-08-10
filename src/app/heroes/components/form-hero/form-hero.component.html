@@ -1,0 +1,43 @@
+<form [formGroup]="heroForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+
+    <div class="col-6">
+      <label for="image">Imagen (JPEG o PNG)</label>
+      <input type="file" id="image" (change)="onFileChange($event)" accept="image/png, image/jpeg" />
+      <div *ngIf="heroForm.controls['image'].invalid && heroForm.controls['image'].touched">
+        Por favor selecciona una imagen JPEG o PNG válida.
+      </div>
+      <div *ngIf="heroForm.controls['image'].value; else placeholderImage">
+        <img [src]="heroForm.controls['image'].value" alt="Preview imagen" style="max-width: 200px; margin-top: 10px;" />
+      </div>
+      
+      <ng-template #placeholderImage>
+        <img src="assets/img/default-profile.png" alt="Imagen genérica" style="max-width: 200px; margin-top: 10px;" />
+      </ng-template>
+    </div>
+  <div class="col-6">
+    <div class="row">
+
+      <mat-form-field class="example-form-field">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" formControlName="name">
+      </mat-form-field>
+      <div *ngIf="heroForm.controls['name'].invalid && heroForm.controls['name'].touched">
+        The name is required
+      </div>
+    </div>
+
+    <div class="row">
+      <mat-form-field class="example-full-width">
+        <mat-label>Description</mat-label>
+        <textarea matInput placeholder="Ex. It makes me feel..." formControlName="description"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+
+  </div>
+
+  <div class="d-flex justify-content-end w-100">
+    <button mat-flat-button type="submit" [disabled]="heroForm.invalid">Save Hero</button>
+  </div>
+</form>

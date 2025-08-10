@@ -1,10 +1,15 @@
+<div class="container-xxl">
+    <div class="d-flex justify-content-end w-100 p-3">
+        <button mat-flat-button (click)="addHero()">Add Hero</button>
+    </div>
+    
 <div class="card">
     @if(heroes){
-    <app-header [icon]="'military_tech'" [title]="'List of Heroes'" [totalRegistros]="lengthHeroes"
-        (searchEvent)="searchHero($event)"></app-header>
+        <app-header [icon]="'military_tech'" [title]="'List of Heroes'" [totalRegistros]="lengthHeroes" [searchable]="true"
+        (searchEvent)="searchHero($event)" ></app-header>
     }
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 bg-white">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z0 bg-white">
 
         <ng-container matColumnDef="image">
             <th mat-header-cell *matHeaderCellDef></th>
@@ -12,24 +17,25 @@
                 <img class="rounded-2 p-2" [src]="element.image" width="150" height="150">
             </td>
         </ng-container>
-
+        
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Super Hero </th>
             <td mat-cell *matCellDef="let element"> {{element.name}} </td>
         </ng-container>
-
+        
         <ng-container matColumnDef="description">
             <th mat-header-cell *matHeaderCellDef> Description </th>
             <td mat-cell *matCellDef="let element"> {{element.description}} </td>
         </ng-container>
-
+        
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-
+    
     @if(heroes){
-    <mat-paginator class="bg-white" [length]="lengthHeroes" [pageSize]="heroesPerPage" [pageSizeOptions]="[5, 10]"
+        <mat-paginator class="bg-white" [length]="lengthHeroes" [pageSize]="heroesPerPage" [pageSizeOptions]="[5, 10]"
         aria-label="Select page">
     </mat-paginator>
-    }
+}
+</div>
 </div>

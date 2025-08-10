@@ -7,11 +7,12 @@ import { Hero } from '../../interfaces/heroe.interface';
 import { HeaderComponent } from '../../../shared/components/header/header.component';
 import { HeroesService } from '../../services/heroes-service/heroes.service';
 import { take } from 'rxjs';
-
+import { Router, RouterModule } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-heroeslist',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatPaginatorModule, HeaderComponent],
+  imports: [CommonModule, MatTableModule, MatPaginatorModule, HeaderComponent, RouterModule, MatButtonModule],
   providers: [HeroesEndpointsService, HeroesService],
   templateUrl: './heroeslist.component.html',
   styleUrl: './heroeslist.component.scss'
@@ -21,6 +22,7 @@ export class HeroeslistComponent implements OnInit {
 
   private _heroEndpointsService = inject(HeroesEndpointsService);
   private _heroService = inject(HeroesService);
+  private _router = inject(Router);
 
   public displayedColumns: string[] = ['image', 'name', 'description'];
   public dataSource = new MatTableDataSource<Hero>([]);
@@ -59,5 +61,9 @@ export class HeroeslistComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  public addHero(){
+    this._router.navigate(['/add-hero']);
   }
 }
