@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -16,11 +16,12 @@ import { ACCEPTED_FILES_LIST } from '../../mocks/accepted-file-list.mock';
   styleUrl: './form-hero.component.scss'
 })
 export class FormHeroComponent {
+  @Input() heroeSelected?: Hero | null = null;
   @Output() onHero: EventEmitter<Hero> = new EventEmitter<Hero>();
-  
+
   public heroForm!: FormGroup;
   public genericImg: string = GENERIC_IMG;
-  
+
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -29,6 +30,10 @@ export class FormHeroComponent {
       description: ['', [Validators.required]],
       image: ['', [Validators.required, this._imageValidator()]]
     });
+
+    if (this.heroeSelected) {
+      this.heroForm.patchValue(this.heroeSelected)
+    }
   }
 
   private _imageValidator(): ValidatorFn {
@@ -71,7 +76,13 @@ export class FormHeroComponent {
 
   public sendToFather() {
     if (this.heroForm.valid) {
-      const hero: Hero = this.heroForm.value;
+      let hero: Hero = this.heroForm.value;
+      if(this.heroeSelected){
+        hero = {
+          ...hero,
+          id: this.heroeSelected.id
+        }
+      }
       this.onHero.emit(hero);
     } else {
       this.heroForm.markAllAsTouched();

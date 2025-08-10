@@ -10,6 +10,10 @@ export const routes: Routes = [
         loadComponent: () => import('./heroes/pages/add-hero/add-hero.component').then(c => c.AddHeroComponent)
     },
     {
+        path: 'edit-hero/:id',
+        loadComponent: () => import('./heroes/pages/edit-hero/edit-hero.component').then(c => c.EditHeroComponent)
+    },
+    {
         path: '',
         redirectTo: '/heroes',
         pathMatch: 'full'

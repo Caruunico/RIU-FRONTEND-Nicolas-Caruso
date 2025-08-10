@@ -14,14 +14,22 @@ export class HeroesService {
     this.heroes.set(heroes);
   }
 
+  public getHero(id: number) {
+    return this.heroes().find(hero => hero.id == id);
+  }
+
   public addHero(hero: Hero) {
     this.heroes.update(current => {
       const lastId = current.length > 0 ? Math.max(...current.map(h => h.id ?? 0)) : 0;
       const newHero = { ...hero, id: lastId + 1 };
       return [...current, newHero];
     });
+  }
 
-    console.log(this.heroes())
+  public editHero(updatedHero: Hero) {
+    this.heroes.update(current => {
+      return current.map(hero => hero.id === updatedHero.id ? updatedHero : hero);
+    });
   }
 
 }
