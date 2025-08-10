@@ -1,0 +1,8 @@
+<div class="container-xxl p-5 d-flex flex-column justify-content-center align-items-center">
+    <h4>You are going to delete <strong>{{hero?.name}}</strong></h4>
+    <p>¿Are you sure?</p>
+    <div class="w-100 d-flex justify-content-center align-items-center mt-2">
+        <button mat-stroked-button class="button-back" (click)="modal.close()">Volver</button>
+        <button mat-flat-button (click)="deleteHero()">Delete Hero</button>
+    </div>
+</div>

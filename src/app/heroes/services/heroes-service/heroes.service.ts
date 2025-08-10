@@ -32,4 +32,8 @@ export class HeroesService {
     });
   }
 
+  public deleteHero(id: number) {
+    this.heroes.update(current => current.filter(hero => hero.id !== id));
+  }
+
 }
