@@ -1,0 +1,47 @@
+@use '../../../../assets/styles/mixins' as *;
+
+.header-sinister {
+  padding: 10px 0 0 0;
+
+  .subtitle {
+    margin: 0 5px 0 0;
+    @include font(19px, 700, 45px, start, #303B47);
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 150px !important;
+
+    span {
+      margin-right: 5px;
+      flex-shrink: 0;
+    }
+
+    white-space: normal;
+  }
+
+  > span {
+    flex-shrink: 0;
+    margin-left: 10px;
+  }
+
+  @media (max-width: 576px) {
+    .d-flex {
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 5px;
+    }
+
+    .subtitle {
+      flex-basis: 100%;
+      margin-bottom: 4px;
+    }
+
+    > span {
+      flex-basis: 100%; 
+      margin-left: 0;
+      font-size: 0.9rem;
+      color: gray;
+    }
+  }
+}
