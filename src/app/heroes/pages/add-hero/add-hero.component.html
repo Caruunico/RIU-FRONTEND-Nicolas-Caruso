@@ -1,5 +1,4 @@
 <div class="card">
     <app-header [title]="'Add your Hero'" [icon]="'person_add'"></app-header>
-    <app-form-hero></app-form-hero>
-
+    <app-form-hero (onHero)="addHero($event)"></app-form-hero>
 </div>

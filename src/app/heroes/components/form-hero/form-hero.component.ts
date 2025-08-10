@@ -1,9 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { Hero } from '../../interfaces/heroe.interface';
+import { GENERIC_IMG } from '../../mocks/generic-img.mock';
+import { ACCEPTED_FILES } from '../../interfaces/accepted-files.type';
+import { ACCEPTED_FILES_LIST } from '../../mocks/accepted-file-list.mock';
 
 @Component({
   selector: 'app-form-hero',
@@ -13,22 +16,22 @@ import { Hero } from '../../interfaces/heroe.interface';
   styleUrl: './form-hero.component.scss'
 })
 export class FormHeroComponent {
-
-  heroForm!: FormGroup;
-
+  @Output() onHero: EventEmitter<Hero> = new EventEmitter<Hero>();
+  
+  public heroForm!: FormGroup;
+  public genericImg: string = GENERIC_IMG;
+  
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-    // Inicializo el form con valores vacíos o por defecto
     this.heroForm = this.fb.group({
-      id: [0, [Validators.required, Validators.min(1)]],
       name: ['', [Validators.required, Validators.minLength(3)]],
-      description: [''],
-      image: ['', [Validators.required, this.imageValidator()]]
+      description: ['', [Validators.required]],
+      image: ['', [Validators.required, this._imageValidator()]]
     });
   }
 
-  imageValidator(): ValidatorFn {
+  private _imageValidator(): ValidatorFn {
     return (control) => {
       const value = control.value;
       if (!value) return null;
@@ -39,7 +42,7 @@ export class FormHeroComponent {
 
       if (typeof value === 'string') {
         const ext = value.split('.').pop()?.toLowerCase();
-        if (ext === 'jpg' || ext === 'jpeg' || ext === 'png') {
+        if (ext === ACCEPTED_FILES.JPG || ext === ACCEPTED_FILES.JPEG || ext === ACCEPTED_FILES.PNG) {
           return null;
         }
       }
@@ -48,13 +51,12 @@ export class FormHeroComponent {
     };
   }
 
-  // Handler al seleccionar archivo
-  onFileChange(event: Event) {
+  public onFileChange(event: Event) {
     const input = event.target as HTMLInputElement;
     if (!input.files?.length) return;
 
     const file = input.files[0];
-    const allowedTypes = ['image/jpeg', 'image/png'];
+    const allowedTypes = ACCEPTED_FILES_LIST;
     if (!allowedTypes.includes(file.type)) {
       this.heroForm.controls['image'].setErrors({ invalidImageFormat: true });
       return;
@@ -62,17 +64,15 @@ export class FormHeroComponent {
 
     const reader = new FileReader();
     reader.onload = () => {
-      // reader.result es base64 string
       this.heroForm.controls['image'].setValue(reader.result as string);
     };
     reader.readAsDataURL(file);
   }
 
-  onSubmit() {
+  public sendToFather() {
     if (this.heroForm.valid) {
       const hero: Hero = this.heroForm.value;
-      console.log('Formulario válido, héroe:', hero);
-      // acá harías la lógica para guardar o enviar el héroe
+      this.onHero.emit(hero);
     } else {
       this.heroForm.markAllAsTouched();
     }

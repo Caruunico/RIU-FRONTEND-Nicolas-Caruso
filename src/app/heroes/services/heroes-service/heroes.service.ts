@@ -14,4 +14,14 @@ export class HeroesService {
     this.heroes.set(heroes);
   }
 
+  public addHero(hero: Hero) {
+    this.heroes.update(current => {
+      const lastId = current.length > 0 ? Math.max(...current.map(h => h.id ?? 0)) : 0;
+      const newHero = { ...hero, id: lastId + 1 };
+      return [...current, newHero];
+    });
+
+    console.log(this.heroes())
+  }
+
 }

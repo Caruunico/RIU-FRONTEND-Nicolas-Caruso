@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, computed, effect, inject, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { HeroesEndpointsService } from '../../services/heroes-endpoints/heroes-endpoints.service';
@@ -9,11 +9,12 @@ import { HeroesService } from '../../services/heroes-service/heroes.service';
 import { take } from 'rxjs';
 import { Router, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+
 @Component({
   selector: 'app-heroeslist',
   standalone: true,
   imports: [CommonModule, MatTableModule, MatPaginatorModule, HeaderComponent, RouterModule, MatButtonModule],
-  providers: [HeroesEndpointsService, HeroesService],
+  providers: [HeroesEndpointsService],
   templateUrl: './heroeslist.component.html',
   styleUrl: './heroeslist.component.scss'
 })
@@ -32,7 +33,13 @@ export class HeroeslistComponent implements OnInit {
   public heroesPerPage = 5;
   public lengthHeroes: number = 0;
 
-  constructor() { }
+  constructor() {
+    effect(() => {
+      const heroes = this._heroService.heroes();
+      this.dataSource = new MatTableDataSource(heroes);
+      this.lengthHeroes = this.dataSource.filteredData.length;
+    });
+  }
 
   ngOnInit(): void {
     this.loadHeroes();
@@ -43,16 +50,21 @@ export class HeroeslistComponent implements OnInit {
   }
 
   public loadHeroes(): void {
+    if (this._heroService.heroes().length > 0) {
+      this.heroes = this._heroService.heroes();
+      this._heroService.setHeroes(this.heroes);
+      return;
+    }
+
     this._heroEndpointsService.getHeroes().pipe(take(1)).subscribe({
       next: (heroes: Hero[]) => {
         this.heroes = heroes;
         this._heroService.setHeroes(heroes);
-        this.dataSource = new MatTableDataSource(heroes);
-        this.lengthHeroes = this.dataSource.filteredData.length;
       },
       error: (error) => console.error(error),
     });
   }
+
 
   public searchHero(filter: string) {
     this.dataSource.filter = filter.trim().toLowerCase();
@@ -63,7 +75,7 @@ export class HeroeslistComponent implements OnInit {
     }
   }
 
-  public addHero(){
+  public addHero() {
     this._router.navigate(['/add-hero']);
   }
 }

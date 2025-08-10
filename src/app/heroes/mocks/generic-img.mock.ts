@@ -1,0 +1,1 @@
+export const GENERIC_IMG = '../../../../assets/img/generic.png'

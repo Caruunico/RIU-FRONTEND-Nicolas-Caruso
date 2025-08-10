@@ -1,43 +1,55 @@
-<form [formGroup]="heroForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="heroForm">
   <div class="row">
 
-    <div class="col-6">
-      <label for="image">Imagen (JPEG o PNG)</label>
-      <input type="file" id="image" (change)="onFileChange($event)" accept="image/png, image/jpeg" />
-      <div *ngIf="heroForm.controls['image'].invalid && heroForm.controls['image'].touched">
+    <div class="col-6 text-center">
+      <label for="image" class="image-label">
+        <input type="file" id="image" accept="image/png, image/jpeg" hidden (change)="onFileChange($event)" />
+
+        @if(heroForm.get('image')?.value){
+          <img [src]="heroForm.get('image')?.value"
+          alt="Preview imagen" class="image-preview" />
+        }@else{
+            <img [src]="genericImg" alt="Imagen genérica" class="image-preview" />
+        }
+      </label>
+
+
+      @if (heroForm.controls['image'].invalid && heroForm.controls['image'].touched) {
+      <div class="text-danger">
         Por favor selecciona una imagen JPEG o PNG válida.
       </div>
-      <div *ngIf="heroForm.controls['image'].value; else placeholderImage">
-        <img [src]="heroForm.controls['image'].value" alt="Preview imagen" style="max-width: 200px; margin-top: 10px;" />
+      }
+    </div>
+
+    <div class="col-6">
+      <div class="row mb-2">
+        <mat-form-field class="example-form-field">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" formControlName="name" />
+          @if (heroForm.get('name')?.hasError('required')) {
+          <mat-error>Name is <strong>required</strong></mat-error>
+          }
+          @if (heroForm.get('name')?.hasError('minlength')) {
+          <mat-error>The name must be at least 3 lettersc</mat-error>
+          }
+        </mat-form-field>
       </div>
-      
-      <ng-template #placeholderImage>
-        <img src="assets/img/default-profile.png" alt="Imagen genérica" style="max-width: 200px; margin-top: 10px;" />
-      </ng-template>
-    </div>
-  <div class="col-6">
-    <div class="row">
 
-      <mat-form-field class="example-form-field">
-        <mat-label>Name</mat-label>
-        <input matInput type="text" formControlName="name">
-      </mat-form-field>
-      <div *ngIf="heroForm.controls['name'].invalid && heroForm.controls['name'].touched">
-        The name is required
+      <div class="row">
+        <mat-form-field class="example-full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput placeholder="" formControlName="description"></textarea>
+          @if (heroForm.get('description')?.hasError('required')) {
+          <mat-error>Description is <strong>required</strong></mat-error>
+          }
+        </mat-form-field>
       </div>
     </div>
-
-    <div class="row">
-      <mat-form-field class="example-full-width">
-        <mat-label>Description</mat-label>
-        <textarea matInput placeholder="Ex. It makes me feel..." formControlName="description"></textarea>
-      </mat-form-field>
-    </div>
-  </div>
-
   </div>
 
   <div class="d-flex justify-content-end w-100">
-    <button mat-flat-button type="submit" [disabled]="heroForm.invalid">Save Hero</button>
+    <button mat-flat-button type="submit" [disabled]="heroForm.invalid" (click)="sendToFather()">
+      Save Hero
+    </button>
   </div>
 </form>
