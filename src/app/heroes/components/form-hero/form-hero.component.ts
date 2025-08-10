@@ -7,10 +7,11 @@ import { Hero } from '../../interfaces/heroe.interface';
 import { GENERIC_IMG } from '../../mocks/generic-img.mock';
 import { ACCEPTED_FILES } from '../../interfaces/accepted-files.type';
 import { ACCEPTED_FILES_LIST } from '../../mocks/accepted-file-list.mock';
+import { ToUpperCaseDirective } from '../../../shared/directives/to-upper-case.directive';
 
 @Component({
   selector: 'app-form-hero',
-  imports: [CommonModule, ReactiveFormsModule, MatInputModule, MatButtonModule],
+  imports: [CommonModule, ReactiveFormsModule, MatInputModule, MatButtonModule, ToUpperCaseDirective],
   standalone: true,
   templateUrl: './form-hero.component.html',
   styleUrl: './form-hero.component.scss'
