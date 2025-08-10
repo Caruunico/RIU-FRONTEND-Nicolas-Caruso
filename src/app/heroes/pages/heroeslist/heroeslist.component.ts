@@ -11,11 +11,13 @@ import { Router, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { NgbModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmDeleteComponent } from '../../components/confirm-delete/confirm-delete.component';
 
 @Component({
   selector: 'app-heroeslist',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatPaginatorModule, HeaderComponent, RouterModule, MatButtonModule, MatMenuModule, MatIconModule],
+  imports: [CommonModule, MatTableModule, MatPaginatorModule, HeaderComponent, RouterModule, MatButtonModule, MatMenuModule, MatIconModule, NgbModalModule, ConfirmDeleteComponent],
   providers: [HeroesEndpointsService],
   templateUrl: './heroeslist.component.html',
   styleUrl: './heroeslist.component.scss'
@@ -26,6 +28,7 @@ export class HeroeslistComponent implements OnInit {
   private _heroEndpointsService = inject(HeroesEndpointsService);
   private _heroService = inject(HeroesService);
   private _router = inject(Router);
+  private modalService = inject(NgbModal);
 
   public displayedColumns: string[] = ['image', 'name', 'description', 'actions'];
   public dataSource = new MatTableDataSource<Hero>([]);
@@ -75,6 +78,21 @@ export class HeroeslistComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  public deleteHero(hero: Hero){
+     const modalRef = this.modalService.open(ConfirmDeleteComponent, {
+      size: 'lg',
+      centered: true
+    });
+
+    modalRef.componentInstance.hero = hero;
+
+    modalRef.result.then((result) => {
+      if (!result) return;
+
+      this._heroService.deleteHero(hero.id!)
+    });
   }
 
   public goToAddHero() {
