@@ -1,7 +1,7 @@
 <form [formGroup]="heroForm">
   <div class="row">
 
-    <div class="col-6 text-center">
+    <div class="col-12 col-md-6 text-center">
       <label for="image" class="image-label">
         <input type="file" id="image" accept="image/png, image/jpeg" hidden (change)="onFileChange($event)" />
 
@@ -21,7 +21,7 @@
       }
     </div>
 
-    <div class="col-6">
+    <div class="col-12 col-md-6 mt-2">
       <div class="row mb-2">
         <mat-form-field class="example-form-field">
           <mat-label>Name</mat-label>
