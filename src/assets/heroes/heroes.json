@@ -10,19 +10,19 @@
       "id": 2,
       "name": "Wonder Woman",
       "description": "Wonder Woman es una guerrera amazona con habilidades de combate sobresalientes, velocidad y vuelo. Es conocida como un símbolo de justicia, igualdad y fuerza.",
-      "image": "https://i.pinimg.com/564x/09/7a/1a/097a1a54dd9839fc8f373997e3701893.jpg"
+      "image": "https://i.pinimg.com/736x/9e/fd/b3/9efdb305a922d7cd972e35ab874564ca.jpg"
     },
     {
       "id": 3,
       "name": "Batman",
       "description": "Batman es un vigilante enmascarado que lucha contra el crimen en Gotham City usando su inteligencia, habilidades de combate y una variedad de tecnologías avanzadas.",
-      "image": "assets/img/batman.png"
+      "image": "https://i.pinimg.com/736x/ef/c4/84/efc484cba8b209eff731656231584f5c.jpg"
     },
     {
       "id": 4,
       "name": "Spider-Man",
       "description": "Spider-Man es un superhéroe que posee habilidades arácnidas, lo que le permite trepar muros, liberar telarañas y tener un sentido arácnido que le advierte de peligros inminentes.",
-      "image": "assets/img/spiderman.png"
+      "image": "https://i.pinimg.com/736x/80/3a/22/803a22de4f7d152fde9599c7fb696e8c.jpg"
     },
     {
       "id": 5,
@@ -40,7 +40,7 @@
       "id": 7,
       "name": "Hulk",
       "description": "Hulk es el alter ego de Bruce Banner, un científico que se transforma en un monstruo verde gigante bajo estrés emocional. Posee fuerza increíble y capacidad regenerativa.",
-      "image": "assets/img/hulk.png"
+      "image": "https://i.pinimg.com/736x/4f/8b/ab/4f8babb073b2f4185830da17415ff6a5.jpg"
     },
     {
       "id": 8,
@@ -58,13 +58,13 @@
       "id": 10,
       "name": "Aquaman",
       "description": "Aquaman es el gobernante de Atlantis y el rey de los océanos. Posee la capacidad de comunicarse con la vida marina y es extremadamente fuerte y resistente.",
-      "image": "assets/img/aquaman.png"
+      "image": "https://i.pinimg.com/736x/96/f6/f9/96f6f9fa1d9e4ad3cbf8a0510244197c.jpg"
     },
     {
       "id": 11,
       "name": "Green Lantern",
       "description": "Green Lantern es un miembro de la Green Lantern Corps, una fuerza policial intergaláctica. Utiliza un anillo de poder que le otorga la capacidad de crear manifestaciones de luz sólida.",
-      "image": "assets/img/linterna-verde.png"
+      "image": "https://i.pinimg.com/736x/5a/3b/33/5a3b33b383030f844de0c13d785dca2f.jpg"
     },
     {
       "id": 12,
@@ -82,13 +82,13 @@
       "id": 14,
       "name": "Wolverine",
       "description": "Wolverine es un mutante con habilidades regenerativas, sentidos agudizados y garras retráctiles de adamantium. Es un miembro prominente de los X-Men.",
-      "image": "assets/img/wolverine.png"
+      "image": "https://i.pinimg.com/736x/18/59/85/185985fb078b7be00f7d7c18361cfca4.jpg"
     },
     {
       "id": 15,
       "name": "Green Arrow",
       "description": "Green Arrow, también conocido como Oliver Queen, es un habilidoso arquero y luchador cuerpo a cuerpo. Utiliza su destreza con el arco y la flecha para luchar contra el crimen en Star City.",
-      "image": "assets/img/linterna-verde.png"
+      "image": "https://i.pinimg.com/736x/46/4e/09/464e098d35cfe0921fcaac4edd48b7d7.jpg"
     },
     {
       "id": 16,
@@ -100,7 +100,7 @@
       "id": 17,
       "name": "Captain Marvel",
       "description": "Captain Marvel, también conocida como Carol Danvers, es una heroína con habilidades de vuelo, fuerza sobrehumana y la capacidad de disparar explosiones de energía desde sus manos.",
-      "image": "assets/img/marvel-logo.png"
+      "image": "https://i.pinimg.com/736x/75/66/59/75665901996352646b85ab39b0a4a93b.jpg"
     },
     {
       "id": 18,
@@ -118,7 +118,7 @@
       "id": 20,
       "name": "Vision",
       "description": "Vision es un androide sintético creado por Ultron, pero más tarde se une a los Avengers. Tiene una variedad de habilidades, incluida la densidad variable y la capacidad de volar.",
-      "image": "assets/img/A-64.png"
+      "image": "https://i.pinimg.com/736x/c0/79/d4/c079d4c74ebe834f2f62b0c791b5bd29.jpg"
     }
   ]
 }
