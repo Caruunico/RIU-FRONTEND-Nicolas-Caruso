@@ -1,1 +1,6 @@
-  <router-outlet></router-outlet>
+<div class="contenedor-spinner" *ngIf="loading$ | async">
+    <div class="spinner d-flex justify-content-center">
+        <div class="spinner-border" role="status"></div>
+    </div>
+</div>
+<router-outlet></router-outlet>

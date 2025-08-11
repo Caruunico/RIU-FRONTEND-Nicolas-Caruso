@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { Hero } from '../../interfaces/heroe.interface';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, of } from 'rxjs';
+import { delay, map, Observable, of } from 'rxjs';
 
 export class HeroesEndpointsService {
   private apiUrl = 'assets/heroes/heroes.json';
@@ -14,6 +14,7 @@ export class HeroesEndpointsService {
     }
 
     return this.http.get<{ superheroes: Hero[] }>(this.apiUrl).pipe(
+      delay(3000),
       map((response) => {
         this.heroesCache = response.superheroes;
         return this.heroesCache;

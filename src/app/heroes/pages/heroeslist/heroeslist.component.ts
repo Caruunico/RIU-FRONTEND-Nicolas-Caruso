@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, effect, inject, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, computed, effect, inject, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { HeroesEndpointsService } from '../../services/heroes-endpoints/heroes-endpoints.service';
@@ -22,7 +22,7 @@ import { ConfirmDeleteComponent } from '../../components/confirm-delete/confirm-
   templateUrl: './heroeslist.component.html',
   styleUrl: './heroeslist.component.scss'
 })
-export class HeroeslistComponent implements OnInit {
+export class HeroeslistComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   private _heroEndpointsService = inject(HeroesEndpointsService);
@@ -43,6 +43,8 @@ export class HeroeslistComponent implements OnInit {
       const heroes = this._heroService.heroes();
       this.dataSource = new MatTableDataSource(heroes);
       this.lengthHeroes = this.dataSource.filteredData.length;
+
+      if(!this.dataSource.paginator) this.dataSource.paginator = this.paginator;
     });
   }
 
@@ -80,8 +82,8 @@ export class HeroeslistComponent implements OnInit {
     }
   }
 
-  public deleteHero(hero: Hero){
-     const modalRef = this.modalService.open(ConfirmDeleteComponent, {
+  public deleteHero(hero: Hero) {
+    const modalRef = this.modalService.open(ConfirmDeleteComponent, {
       size: 'lg',
       centered: true
     });
@@ -99,7 +101,7 @@ export class HeroeslistComponent implements OnInit {
     this._router.navigate(['/add-hero']);
   }
 
-  public goToEditHero(id: number){
+  public goToEditHero(id: number) {
     this._router.navigate(['/edit-hero/' + id]);
   }
 }
